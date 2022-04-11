@@ -18,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppConfigService } from 'src/app/app-config.service';
 import * as appConstants from 'src/app/app.constants';
 import jwt_decode from "jwt-decode";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,29 +26,29 @@ import jwt_decode from "jwt-decode";
 export class AuthInterceptor implements HttpInterceptor {
   errorMessages: any;
   decoded: any;
-
   constructor(
     private redirectService: LoginRedirectService,
     private router: Router,
     private headerService: HeaderService,
     private dialog: MatDialog,
     private translateService: TranslateService,
-    private appService: AppConfigService
+    private appService: AppConfigService,
+    private cookieService: CookieService
   ) {}
   // function which will be called for all http calls
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    request = request.clone({withCredentials: true});
     request = request.clone({
-      withCredentials: true
+      setHeaders: { 'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN') }
     });
     return next.handle(request).pipe(
       tap(
         event => {
           if (event instanceof HttpResponse) {
-            //console.log(event);
-            if (event.url.split('/').includes('validateToken')) {
+            if (event.url.split('/').includes('validateToken')) {                
                 if (event.body.response) {
                   this.decoded = jwt_decode(event.body.response.token);
                   this.headerService.setDisplayUserName(this.decoded["name"]);
