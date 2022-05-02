@@ -73,7 +73,7 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.findElement(By.linkText("Admin")).click();
+		//driver.findElement(By.linkText("Admin")).click();
 		String language1 = null;
 		try {
 			//String loginlang = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
