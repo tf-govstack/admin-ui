@@ -81,10 +81,16 @@ public class BaseClass {
 
 			System.out.println(language1);
 			if(!language1.equals("sin"))
-			{Commons.click(driver, By.xpath("//*[@class='kc-dropdown']"));
-			String var = "//*[@class='kc-dropdown-item']/a[contains(text(),'" + language1 + "')]";
+			{Commons.click(driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+			String var = "//a[contains(text(),'" + language1 + "')]";
 			Commons.click(driver, By.xpath(var));
 			}
+//			
+//			if(!language1.equals("sin"))
+//			{Commons.click(driver, By.xpath("//*[@class='kc-dropdown']"));
+//			String var = "//*[@class='kc-dropdown-item']/a[contains(text(),'" + language1 + "')]";
+//			Commons.click(driver, By.xpath(var));
+//			}
 		} catch (Exception e) {
 			e.getMessage();
 		}
