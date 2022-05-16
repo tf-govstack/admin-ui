@@ -85,12 +85,32 @@ export class CreateComponent {
     }
   }
 
-  downloadExcel(){
+  downloadCSV(){
     let buildURL = window.location.origin +this.appService.getConfig().templateRepoUrl+this.tableName+".csv"
     this.dataStorageService
     .getsampletemplate(buildURL).subscribe(
       data => {
         var fileName = this.tableName+".csv";
+        const contentDisposition = data.headers.get('Content-Disposition');
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        saveAs(data.body, fileName);
+      },
+      err => {
+        console.error(err);
+      });
+  }
+  downloadExcel(){
+    let buildURL = window.location.origin +this.appService.getConfig().templateRepoUrl+this.tableName+".xlsx"
+    this.dataStorageService
+    .getsampletemplate(buildURL).subscribe(
+      data => {
+        var fileName = this.tableName+".xlsx";
         const contentDisposition = data.headers.get('Content-Disposition');
         if (contentDisposition) {
           const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
