@@ -12,7 +12,7 @@ export class DataStorageService {
 
   private BASE_URL = this.appService.getConfig().baseUrl;
 
-  langIndependentTables : string[] = ['devicetypes','machinetypes','devicespecifications','machinespecifications'];
+  langIndependentTables : string[] = ['devicetypes','machinetypes','devicespecifications','machinespecifications','devices','machines'];
   
   getI18NLanguageFiles(langCode:string){
    return this.http.get(`./assets/i18n/${langCode}.json`);
