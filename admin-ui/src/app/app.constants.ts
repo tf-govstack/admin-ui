@@ -41,14 +41,14 @@ export const navItems = [
         icon: null,
         route: '/admin/resources/devices',
         auditEventId: 'ADM-005',
-        roles: ['ZONAL_ADMIN']
+        roles: ['ZONAL_ADMIN','MASTERDATA_ADMIN']
       },
       {
         displayName: 'menuItems.item2.subItem3',
         icon: null,
         route: '/admin/resources/machines',
         auditEventId: 'ADM-007',
-        roles: ['ZONAL_ADMIN']
+        roles: ['ZONAL_ADMIN','MASTERDATA_ADMIN']
       },
       {
         displayName: 'menuItems.item2.subItem4',
@@ -62,11 +62,11 @@ export const navItems = [
         icon: null,
         route: '/admin/resources/users',
         auditEventId: 'ADM-006',
-        roles: ['ZONAL_ADMIN']
+        roles: ['ZONAL_ADMIN', 'GLOBAL_ADMIN']
       }
     ],
     auditEventId: 'ADM-003',
-    roles: ['ZONAL_ADMIN', 'GLOBAL_ADMIN']
+    roles: ['ZONAL_ADMIN', 'GLOBAL_ADMIN','MASTERDATA_ADMIN']
   },
   {
     displayName: 'menuItems.item4.title',
@@ -140,32 +140,32 @@ export const navItems = [
         icon: null,
         route: '/admin/keymanager/generatecsr',
         auditEventId: 'ADM-004',
-        roles: ['GLOBAL_ADMIN', 'ZONAL_ADMIN', 'MASTERDATA_ADMIN']
+        roles: ['KEY_MAKER']
       },      
       {
         displayName: 'menuItems.item7.subItem3',
         icon: null,
         route: '/admin/keymanager/getcertificate',
         auditEventId: 'ADM-004',
-        roles: ['GLOBAL_ADMIN', 'ZONAL_ADMIN', 'MASTERDATA_ADMIN']
+        roles: ['KEY_MAKER']
       },
       {
         displayName: 'menuItems.item7.subItem4',
         icon: null,
         route: '/admin/keymanager/uploadcertificate',
         auditEventId: 'ADM-004',
-        roles: ['GLOBAL_ADMIN', 'ZONAL_ADMIN', 'MASTERDATA_ADMIN']
+        roles: ['KEY_MAKER']
       },
       {
         displayName: 'menuItems.item7.subItem5',
         icon: null,
         route: '/admin/keymanager/uploadotherdomaincertificate',
         auditEventId: 'ADM-004',
-        roles: ['GLOBAL_ADMIN', 'ZONAL_ADMIN', 'MASTERDATA_ADMIN']
+        roles: ['KEY_MAKER']
       }
     ],
     auditEventId: 'ADM-003',
-    roles: ['GLOBAL_ADMIN', 'ZONAL_ADMIN', 'MASTERDATA_ADMIN', 'KEY_MAKER']
+    roles: ['KEY_MAKER']
   }
 ];
 
