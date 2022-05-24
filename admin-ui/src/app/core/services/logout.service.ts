@@ -22,24 +22,6 @@ export class LogoutService {
   ) {}
 
   logout() {
-    let adminUrl = this.appService.getConfig().adminUrl;
-    this.http
-    .get(`${this.appService.getConfig().baseUrl}${this.appService.getConfig().logout}?redirecturi=`+btoa(window.location.href), {
-        observe: 'response'
-      })
-      .subscribe(
-        (res: HttpResponse<ResponseModel<LogoutResponse>>) => {
-          if (res.body.response.status === 'Success') {
-            this.redirectService.redirect(
-              window.location.origin + adminUrl
-            );
-          } else {
-            window.alert(res.body.response.message);
-          }
-        },
-        (error: HttpErrorResponse) => {
-          window.alert(error.message);
-        }
-      );
+    this.http.get(`${this.appService.getConfig().baseUrl}${this.appService.getConfig().logout}?redirecturi=`+btoa(window.location.href)).subscribe();
   }
 }
