@@ -22,6 +22,7 @@ export class LogoutService {
   ) {}
 
   logout() {
-    this.http.get(`${this.appService.getConfig().baseUrl}${this.appService.getConfig().logout}?redirecturi=`+btoa(window.location.href)).subscribe();
+    //TODO: NEED TO CHECK THE IMPLEMENTATION LATER
+    window.location.href = `${this.appService.getConfig().baseUrl}${this.appService.getConfig().logout}?redirecturi=`+btoa(window.location.href);
   }
 }
