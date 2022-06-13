@@ -19,7 +19,7 @@
             <mat-form-field>
               <mat-label>{{labelanddatas.operation | translate }}</mat-label>
               <mat-select
-                formControlName="operation" id="operation"
+                formControlName="operation" id="operation" required
               >
                 <mat-option
                   *ngFor="let data of labelanddatas.operationCtrl"
@@ -30,13 +30,13 @@
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="uploadForm.controls.operation.touched">
-                {{'genericerror.fieldValidation' | translate}}
+                {{"genericerror.fieldValidation" | translate}}
               </mat-error>
             </mat-form-field>
             <div style="width:100%;display:inline">
               <mat-form-field style="width:96% !important;">              
                 <mat-label>{{labelanddatas.tableName | translate }}</mat-label>
-                <mat-select formControlName="tableName" id="tableName" (selectionChange)="captureDropDownValue($event)" >
+                <mat-select formControlName="tableName" id="tableName" (selectionChange)="captureDropDownValue($event)" required>
                   <mat-option
                     *ngFor="let data of labelanddatas.tableNames"
                     [id]="data.id"
