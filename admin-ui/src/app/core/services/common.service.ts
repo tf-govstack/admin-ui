@@ -35,6 +35,7 @@ import { AuditService } from './audit.service';
 })
 export class CommonService {
   actionMessages: any;
+  serverError: any;
   centerRequest = {} as CenterRequest;
 
   constructor(
@@ -52,6 +53,7 @@ export class CommonService {
       .getTranslation(lang)
       .subscribe(result => {
         this.actionMessages = result.actionMessages;
+        this.serverError = result.serverError;
       });
   }
 
@@ -445,7 +447,7 @@ export class CommonService {
     } else if (type === 'error') {
       obj = {
         title: this.actionMessages[listItem]['error-title'],
-        message: data.errors[0].message,
+        message: this.serverError[data.errors[0].errorCode],
         btnTxt: this.actionMessages[listItem]['btnTxt']
       };
     }

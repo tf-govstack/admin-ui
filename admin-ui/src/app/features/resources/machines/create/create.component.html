@@ -148,6 +148,13 @@
                             {{ data.fieldValue }}
                           </mat-option>
                         </mat-select>
+                        <mat-error
+                            *ngIf="
+                              primary.machineSpecId.touched && primary.machineSpecId.hasError('required')
+                            "
+                          >
+                          {{ "machines.validationMessages.machineSpecId.required" | translate }}
+                          </mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
@@ -222,7 +229,9 @@
                         <mat-form-field>
                         <mat-label>{{ "center.center-name" | translate }}</mat-label>
                         <mat-select
-                          formControlName="regCenterId" id="regCenterId">
+                          formControlName="regCenterId" id="regCenterId"
+                          required
+                          >
                           <mat-option *ngFor="let data of dropDownValues.regCenterCode.primary" [value]="data.id">
                             {{ data.name }}
                           </mat-option>
