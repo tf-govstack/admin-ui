@@ -71,7 +71,7 @@ export const navItems = [
     route: '/admin/download-card',
     children: null,
     auditEventId: 'ADM-009',
-    roles: ['GLOBAL_ADMIN']
+    roles: ['DIGITALCARD_ADMIN']
   },
   {
     displayName: 'menuItems.item3.title',
