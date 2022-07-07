@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as appConstants from '../../app.constants';
 import { RequestModel } from '../models/request.model';
@@ -166,6 +166,18 @@ export class DataStorageService {
   getPacketStatus(registrationId: string) {
     const params = new HttpParams().set('rid', registrationId);
     return this.http.get(this.BASE_URL + 'admin/packetstatusupdate', {params});
+  }
+
+  getLoginDetails() {
+    return this.http.get(this.BASE_URL + 'admin/applicantDetails/getLoginDetails');
+  }
+
+  getCardStatus(registrationId: string) {
+    return this.http.get(this.BASE_URL + 'admin/applicantDetails/'+registrationId);
+  }
+
+  downloadCard(path:string): Observable<HttpResponse<Blob>> {
+    return this.http.get<Blob>(path, { observe: 'response', responseType: 'blob' as 'json' });
   }
 
   getCreateUpdateSteps(entity: string) {
