@@ -66,14 +66,6 @@ export const navItems = [
     roles: ['ZONAL_ADMIN', 'GLOBAL_ADMIN']
   },
   {
-    displayName: 'menuItems.item7.title',
-    icon: './assets/images/packet-status.svg',
-    route: '/admin/download-card',
-    children: null,
-    auditEventId: 'ADM-009',
-    roles: ['DIGITALCARD_ADMIN']
-  },
-  {
     displayName: 'menuItems.item3.title',
     icon: './assets/images/id-card.svg',
     route: '/admin/masterdata',
