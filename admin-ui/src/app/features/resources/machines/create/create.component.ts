@@ -221,11 +221,16 @@ export class CreateComponent {
   }
 
   getCenterDetails(zoneCode: string) {    
+    console.log("zoneCode>>>"+zoneCode);
     this.dataStorageService
       .getFiltersCenterDetailsBasedonZone(this.primaryLang, zoneCode)
       .subscribe(response => {
         if(!response.errors){
           this.dropDownValues.regCenterCode.primary = response.response.registrationCenters;
+          console.log("this.data[0].regCenterId>>>"+this.data[0].regCenterId);
+          if(this.data[0].regCenterId){
+            this.primaryForm.controls.regCenterId.setValue(this.data[0].regCenterId);
+          }  
         }else{
           this.dropDownValues.regCenterCode.primary = [];
         }
@@ -555,6 +560,8 @@ export class CreateComponent {
       this.data[0].machineSpecId
     );
     this.primaryForm.controls.regCenterId.setValue(this.data[0].regCenterId);
+    this.getCenterDetails(this.data[0].zoneCode);
+
   }
 
   showMessage(type: string, data ?: any) {
