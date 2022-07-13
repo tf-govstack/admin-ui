@@ -26,34 +26,42 @@ import org.testng.annotations.Test;
 
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
+import io.mosip.test.admintest.utility.JsonUtil;
 
 public class BlockListTest extends BaseClass {
 
 	@Test(groups = "BL")
 	public void blocklistedwordsCRUD() {
 
+		try {
+			String blocklistedWord=JsonUtil.JsonObjParsing(Commons.getTestData(),"dummyData");
+		
+		
 		String idBlocklisted="admin/masterdata/blocklisted-words/view";
 		Commons.click(driver, By.xpath("//a[@href='#/admin/masterdata']"));
 		
 		Commons.click(driver, By.id(idBlocklisted));
 
-		Commons.click(driver, By.id("Create")); //FIX
-		Commons.enter(driver, By.id("word"), data); 
+		Commons.click(driver, By.id("Create")); 
+		Commons.enter(driver, By.id("word"), blocklistedWord); 
 		Commons.enter(driver, By.id("description"), data);
 
 		
 		Commons.create(driver);
-		Commons.filter(driver, By.id("word"), data);
+		Commons.filter(driver, By.id("word"), blocklistedWord);
 		
 
-		Commons.edit(driver,data+1,By.id("word"));
-		Commons.filter(driver, By.id("word"), data+1);
+		Commons.edit(driver,"UIAutoA",By.id("word"));
+		Commons.filter(driver, By.id("word"), blocklistedWord+"A");
 		
 		Commons.activate(driver);
-		Commons.edit(driver,data+2,By.id("word"));
-		Commons.filter(driver, By.id("word"), data+2);
+		Commons.edit(driver,blocklistedWord+"B",By.id("word"));
+		Commons.filter(driver, By.id("word"), blocklistedWord+"B");
 		Commons.deactivate(driver);
-
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

@@ -82,7 +82,7 @@ public class BaseClass {
 			System.out.println(language1);
 			if(!language1.equals("sin"))
 			{Commons.click(driver, By.xpath("//*[@id='kc-locale-dropdown']"));
-			String var = "//a[contains(text(),'" + language1 + "')]";
+			String var = "//li/a[contains(text(),'" + language1 + "')]";
 			Commons.click(driver, By.xpath(var));
 			}
 //			
