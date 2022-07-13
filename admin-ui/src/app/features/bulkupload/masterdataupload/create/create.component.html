@@ -19,7 +19,7 @@
             <mat-form-field>
               <mat-label>{{labelanddatas.operation | translate }}</mat-label>
               <mat-select
-                formControlName="operation" id="operation"
+                formControlName="operation" id="operation" required
               >
                 <mat-option
                   *ngFor="let data of labelanddatas.operationCtrl"
@@ -30,13 +30,13 @@
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="uploadForm.controls.operation.touched">
-                {{'genericerror.fieldValidation' | translate}}
+                {{"genericerror.fieldValidation" | translate}}
               </mat-error>
             </mat-form-field>
             <div style="width:100%;display:inline">
-              <mat-form-field style="width:98% !important;">              
+              <mat-form-field style="width:96% !important;">              
                 <mat-label>{{labelanddatas.tableName | translate }}</mat-label>
-                <mat-select formControlName="tableName" id="tableName" (selectionChange)="captureDropDownValue($event)" >
+                <mat-select formControlName="tableName" id="tableName" (selectionChange)="captureDropDownValue($event)" required>
                   <mat-option
                     *ngFor="let data of labelanddatas.tableNames"
                     [id]="data.id"
@@ -49,11 +49,12 @@
                   {{'genericerror.fieldValidation' | translate}}
                 </mat-error>              
               </mat-form-field>                
-              <mat-label style="width:2%" *ngIf="showDownloadBtn" (click)="downloadExcel()"><img src="assets/images/download.png" height="18px" width="18px" style="cursor:pointer;" /></mat-label>
+              <mat-label style="width:2%" *ngIf="showDownloadBtn" (click)="downloadCSV()"><img src="assets/images/download-csv.png" height="18px" width="18px" style="cursor:pointer;" /></mat-label>
+              <mat-label style="width:2%" *ngIf="showDownloadBtn" (click)="downloadExcel()"><img src="assets/images/download-excel.png" height="18px" width="18px" style="cursor:pointer;" /></mat-label>
             </div>
             <div class="custom-file-input">    
               <input type="button" *ngIf="buttonalignment === 'rtl'" value="{{labelanddatas.chooseFile | translate }}" class="browseInput">           
-              <input type="file" accept=".csv" #fileInput (click)="onFileClick($event)" (change)="onFileSelect($event)" placeholder="Upload file..." />
+              <input type="file" accept=".xlsx, .xls, .csv" #fileInput (click)="onFileClick($event)" (change)="onFileSelect($event)" placeholder="Upload file..." />
               <input type="text" id="fileName"  formControlName="fileName" placeholder="{{labelanddatas.uploadFile | translate }}">
               <input type="button" *ngIf="buttonalignment === 'ltr'" value="{{labelanddatas.chooseFile | translate }}" class="browseInput">
               <mat-error *ngIf="fileNameError">
