@@ -176,8 +176,10 @@ export class DataStorageService {
     return this.http.get(this.BASE_URL + 'admin/applicantDetails/'+registrationId);
   }
 
-  downloadCard(path:string): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(path, { observe: 'response', responseType: 'blob' as 'json' });
+  downloadCard(id:string): Observable<HttpResponse<Blob>> {
+    let buildURL = this.BASE_URL + 'admin/rid-digital-card/'+id+'?isAcknowledged='+true;
+    let response = this.http.get<Blob>(buildURL, { observe: 'response', responseType: 'blob' as 'json' });
+    return response;
   }
 
   getCreateUpdateSteps(entity: string) {

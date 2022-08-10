@@ -122,9 +122,8 @@ export class DownloadCardComponent implements OnInit {
   submit(selection) {  
     if(selection === 'true'){
       this.auditService.audit(21, 'ADM-045', {'type':'download-card','actioned':'Verify and Download'});
-      let buildURL = 'https://qa3.mosip.net/v1/admin/rid-digital-card/'+this.id+'?isAcknowledged='+true;
       this.dataStorageService
-      .downloadCard(buildURL).subscribe(data => {
+      .downloadCard(this.id).subscribe(data => {
           var fileName = this.id+".pdf";
           const contentDisposition = data.headers.get('Content-Disposition');
           if (contentDisposition) {
