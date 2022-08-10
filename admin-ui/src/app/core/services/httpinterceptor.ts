@@ -61,27 +61,48 @@ export class AuthInterceptor implements HttpInterceptor {
         },
         err => {
           if (err instanceof HttpErrorResponse) {
-            console.log(err.status);
-            console.log(err);
             if (err.status === 401 || err.status === 403) {
               this.redirectService.redirect(window.location.href);
             } else {
-              this.translateService
-                .getTranslation(this.appService.getConfig().primaryLangCode)
-                .subscribe(response => {
-                  this.errorMessages = response.errorPopup;
-                  this.dialog.open(DialogComponent, {
-                    width: '868px',
-                    height: '190px',
-                    data: {
-                      case: 'MESSAGE',
-                      title: this.errorMessages.technicalError.title,
-                      message: this.errorMessages.technicalError.message,
-                      btnTxt: this.errorMessages.technicalError.btnTxt
-                    },
-                    disableClose: true
+              if (window.location.href.indexOf("download-card") > -1) {
+                this.translateService
+                  .getTranslation(this.appService.getConfig().primaryLangCode)
+                  .subscribe(response => {
+                    let error_msg = "";
+                      err.error.text().then(text => {
+                        error_msg = JSON.parse(text).errors[0].message;
+                        this.errorMessages = response.errorPopup;
+                        this.dialog.open(DialogComponent, {
+                          width: '868px',
+                          height: '190px',
+                          data: {
+                            case: 'MESSAGE',
+                            title: "Error",
+                            message: error_msg,
+                            btnTxt: this.errorMessages.technicalError.btnTxt
+                          },
+                          disableClose: true
+                        });
+                      });                    
                   });
-                });
+              }else{
+                this.translateService
+                  .getTranslation(this.appService.getConfig().primaryLangCode)
+                  .subscribe(response => {
+                    this.errorMessages = response.errorPopup;
+                    this.dialog.open(DialogComponent, {
+                      width: '868px',
+                      height: '190px',
+                      data: {
+                        case: 'MESSAGE',
+                        title: this.errorMessages.technicalError.title,
+                        message: this.errorMessages.technicalError.message,
+                        btnTxt: this.errorMessages.technicalError.btnTxt
+                      },
+                      disableClose: true
+                    });
+                  });
+              }
             }
           }
         }
