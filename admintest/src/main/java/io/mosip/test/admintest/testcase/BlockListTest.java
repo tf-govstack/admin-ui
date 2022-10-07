@@ -51,7 +51,7 @@ public class BlockListTest extends BaseClass {
 		Commons.filter(driver, By.id("word"), blocklistedWord);
 		
 
-		Commons.edit(driver,"UIAutoA",By.id("word"));
+		Commons.edit(driver,blocklistedWord+"auto",By.id("word"));
 		Commons.filter(driver, By.id("word"), blocklistedWord+"A");
 		
 		Commons.activate(driver);
