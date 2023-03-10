@@ -26,9 +26,13 @@ import com.paulhammant.ngwebdriver.NgWebDriver;
 
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
+import io.mosip.test.admintest.utility.JsonUtil;
 public class DeviceTest extends BaseClass{
    @Test(groups = "D")
   public void deviceCRUD() throws InterruptedException {
+	   String validityDate;
+	try {
+		validityDate = JsonUtil.JsonObjParsing(Commons.getTestData(),"validityDate");
 	
 	   Commons.click(driver,By.id("admin/resources"));
 	   Commons.click(driver,By.id("/admin/resources/devices"));
@@ -41,7 +45,7 @@ public class DeviceTest extends BaseClass{
 	   Commons.enter(driver, By.id("macAddress"),"1.1234");
  
 	   Commons.enter(driver, By.id("ipAddress"),"2.2345");
-	   Commons.enter(driver, By.id("validity"),"3/3/2023");
+	   Commons.enter(driver, By.id("validity"),validityDate);
       
     Commons.dropdown(driver,By.id("deviceSpecId"));
      Commons.dropdown(driver,By.id("zone"));
@@ -60,5 +64,10 @@ public class DeviceTest extends BaseClass{
      	Commons.filter(driver, By.id("name"), data+2);
      	Commons.deactivate(driver);
      	Commons.decommission(driver);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+     	
     }
   }
